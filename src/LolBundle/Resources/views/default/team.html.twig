@@ -1,0 +1,41 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+  Lol esport Tracker - Teams
+{% endblock %}
+
+{% block body %}
+
+  <h1> Les équipes en course : </h1>
+
+  {% if teams is empty %}
+    <p>{{ 'teams.nb'|transchoice(0) }}</p>
+  {% else %}
+
+    {#{ dump(games) }#}
+    <p>{{ 'teams.nb'|transchoice(teams|length, {'%nb%': teams|length}) }}</p>
+    <table class="table">
+      <thead>
+        <tr>
+          <th scope="col">Equipe</th>
+          <th scope="col">Joueurs</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for team in teams %}
+          <tr>
+            <td>
+              {{ team.name}}
+            </td>
+            <td>
+              {% for player in players %}
+                {#<a href="{{ path('player', {'id': player.id}) }}">#}
+                  {{ player.name }}
+                {#</a>#}
+              {% endfor %}
+            </td>
+          </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+{% endblock %}

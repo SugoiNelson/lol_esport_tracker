@@ -1,0 +1,77 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+  Lol esport Tracker
+{% endblock %}
+
+{% block body %}
+
+  <h1> Bienvenue sur LOL esport tracker ! </h1>
+
+  {% if games is empty %}
+    <p>{{ 'games.nb'|transchoice(0) }}</p>
+  {% else %}
+
+    {#{ dump(games) }#}
+    <p>{{ 'games.nb'|transchoice(games|length, {'%nb%': games|length}) }}</p>
+    <table class="table">
+      <thead>
+        <tr>
+          <th scope="col">Date</th>
+          <th scope="col">Team One</th>
+          <th scope="col">Score</th>
+          <th scope="col"> Team Two</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for game in games %}
+          <tr>
+            <td>
+              {{ game.Date|date('d/m/Y') }}
+            </td>
+            <td>
+              {#<a href="{{ path('team', {'id': team.id}) }}">#}
+                {{ game.teamOne }}
+              {#</a>#}
+            </td>
+            <td>
+              {{ game.teamOneScore }} --- {{ game.teamTwoScore }}
+            </td>
+            <td>
+              {#<a href="{{ path('team', {'id': team.id}) }}">#}
+                {{ game.teamTwo }}
+              {#</a>#}
+            </td>
+          </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  {% endif %}
+
+  {{ form_start(form) }}
+    {{ form_widget(form) }}
+  {{ form_end(form) }}
+
+
+
+  {% for game in games %}
+    {% if game is not empty %}
+      <p>
+      {{ game.Date|date('d/m/Y') }}
+      <br>
+      {{ game.teamOne }} - {{ game.teamTwo }}
+      </p>
+      {{ dump(game) }}
+
+      {{form_start(form)}}
+        {{form_widget(form)}}
+      {{form_end(form)}}
+
+      {#<a href="{{ path('delete_games', {'id': games.id}) }}" class="btn btn-danger">Supprimer le match</a>#}
+
+    {% else %}
+      <p>Ce match n'a pas eu lieu</p>
+    {% endif %}
+  {% endfor %}
+
+{% endblock %}

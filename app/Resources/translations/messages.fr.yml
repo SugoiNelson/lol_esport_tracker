@@ -1,0 +1,23 @@
+games:
+  title: Rencontres
+  nb: "{0} Il n'y a pas de rencontre enregistrée |{1} Il y a 1 rencontre enregistrée |[1, Inf[ Il y a %nb% rencontres enregistrées"
+  added: Rencontre ajoutée
+  updated: Rencontre mise à jour
+  unknown: Rencontre inconnue
+  deleted: Rencontre supprimée
+
+teams:
+  title: Equipes
+  nb: "{0} Il n'y a pas d'équipe |{1} Il y a 1 équipe |[1, Inf[ Il y a %nb% équipes"
+  added: Equipe ajoutée
+  updated: Equipe mise à jour
+  unknown: Equipe inconnue
+  deleted: Equipe supprimée
+
+players:
+  title: Joueurs
+  nb: "{0} Il n'y a pas de joueur |{1} Il y a 1 joueur |[1, Inf[ Il y a %nb% joueurs"
+  added: Joueur ajouté
+  updated: Joueur mis à jour
+  unknown: Joueur inconnu
+  deleted: Joueur supprimé
