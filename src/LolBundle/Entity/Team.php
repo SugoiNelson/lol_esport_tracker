@@ -28,6 +28,22 @@ class Team
      */
     private $name;
 
+    /**
+     * @ORM\ManyToOne(targetEntity="Game", inversedBy="team")
+     * @ORM\JoinColumn(name="game_id", referencedColumnName="id")
+     */
+    private $game;
+
+
+    /**
+     * @ORM\OneToMany(targetEntity="Player", mappedBy="team")
+     */
+    private $player;
+    
+    public function __construct() {
+      $this->team = new ArrayCollection();
+    }
+
 
     /**
      * Get id
@@ -63,10 +79,4 @@ class Team
         return $this->name;
     }
 
-
-    /**
-     * @ORM\ManyToOne(targetEntity="Game", inversedBy="team")
-     * @ORM\JoinColumn(name="game_id", referencedColumnName="id")
-     */
-    private $game;
 }

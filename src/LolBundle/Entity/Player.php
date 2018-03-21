@@ -42,6 +42,16 @@ class Player
      */
     private $gender;
 
+    /**
+     * @ORM\ManyToOne(targetEntity="Team", inversedBy="player")
+     * @ORM\JoinColumn(name="team_id", referencedColumnName="id")
+     */
+    private $team;
+
+    public function __construct() {
+      $this->team = new ArrayCollection();
+    }
+
 
     /**
      * Get id
@@ -125,4 +135,3 @@ class Player
         return $this->gender;
     }
 }
-
