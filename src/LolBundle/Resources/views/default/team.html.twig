@@ -12,7 +12,7 @@
     <p>{{ 'teams.nb'|transchoice(0) }}</p>
   {% else %}
 
-    {#{ dump(games) }#}
+    {{ dump(teams) }}
     <p>{{ 'teams.nb'|transchoice(teams|length, {'%nb%': teams|length}) }}</p>
     <table class="table">
       <thead>
@@ -28,14 +28,21 @@
               {{ team.name}}
             </td>
             <td>
-              {% for player in players %}
-                {#<a href="{{ path('player', {'id': player.id}) }}">#}
-                  {{ player.name }}
-                {#</a>#}
+              {% for player in team %}
+                  {{player.name}}
               {% endfor %}
             </td>
           </tr>
         {% endfor %}
       </tbody>
     </table>
+  {% endif %}
+
+  <p>
+    Ajouter une équipe à la liste des participants :
+  </p>
+  {{form_start(form)}}
+    {{form_widget(form)}}
+  {{form_end(form)}}
+
 {% endblock %}

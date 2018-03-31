@@ -20,6 +20,7 @@ use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Session\Session;
 use Symfony\Component\HttpFoundation\RedirectResponse;
+use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 
 // Import des entitées
 
@@ -30,7 +31,7 @@ use LolBundle\Entity\Game;
 class DefaultController extends Controller
 {
   /**
-   * @Route("/", name="acceuil")
+   * @Route("/", name="home")
    * @Template()
    */
   public function indexAction(Request $request)
@@ -40,16 +41,16 @@ class DefaultController extends Controller
     $game = new Game();
     $form = $this->createFormBuilder($game)
             ->add('date', DateType::class)
-            ->add('team_one', EntityType::class, array(
+            ->add('teamA_id', EntityType::class, array(
               'class' => 'LolBundle:Team',
               'choice_label' => 'name'
             ))
-            ->add('team_two', EntityType::class, array(
+            ->add('teamB_id', EntityType::class, array(
               'class' => 'LolBundle:Team',
               'choice_label' => 'name'
             ))
-            ->add('team_one_score', TextareaType::class)
-            ->add('team_two_score', TextareaType::class)
+            ->add('teamA_Score', IntegerType::class)
+            ->add('teamB_Score', IntegerType::class)
             ->add('save', SubmitType::class, array(
               'label' => 'Ajouter un match !'
             ))
@@ -112,10 +113,10 @@ class DefaultController extends Controller
 
 
   /**
-   * @Route("/articles", name="list_articles")
+   * @Route("/teams", name="list_teams")
    * @Template()
    */
-  public function articlesAction(Request $request)
+  public function teamAction(Request $request)
   {
     $bdd = $this->getDoctrine()->getManager();
 
@@ -149,8 +150,79 @@ class DefaultController extends Controller
     );
   }
 
+  /**
+   * @Route("/team/delete/{id}", name="delete_team")
+   */
+  public function deleteTeam(Request $request, $id){
+
+    $bdd = $this->getDoctrine()->getManager();
+    $traduction = $this->get('translator');
+
+    $team = $bdd->getRepository('LolBundle:Team')->findOneById($id);
+
+    if(!empty($team)){
+      // L'équipe existe
+      $bdd->remove($team);
+      $bdd->flush();
+
+      $this->get('session')->getFlashBag()->add(
+        'success',
+        $traduction->trans('teams.deleted')
+      );
+    }
+    else{
+      // L'équipe n'existe pas
+      $this->get('session')->getFlashBag()->add(
+        'danger',
+        $traduction->trans('teams.unknown')
+      );
+    }
+    return $this->redirectToRoute('home');
+  }
 
 
+    /**
+     * @Route("/players", name="list_players")
+     * @Template()
+     */
+    public function playerAction(Request $request)
+    {
+      $bdd = $this->getDoctrine()->getManager();
 
+      $player = new Player();
+      $form = $this->createFormBuilder($player)
+        ->add('name', TextType::class)
+        ->add('first_name', TextType::class)
+        ->add('gender', TextType::class)
+        ->add('team', EntityType::class, array(
+          'class' => 'LolBundle:Team',
+          'choice_label' => 'name'
+        ))
+        ->add('save', SubmitType::class, array(
+          'label' => 'Ajouter un joueur'
+        ))
+        ->getForm();
+
+      $form->handleRequest($request);
+
+      if($form->isSubmitted() && $form->isValid()){
+        $bdd->persist($player);
+        $bdd->flush();
+
+        $traduction = $this->get('translator');
+
+        $this->get('session')->getFlashBag()->add(
+          'success',
+          $traduction->trans('players.added')
+        );
+      }
+
+      $players = $bdd->getRepository('LolBundle:Player')->findAll();
+
+      return array(
+        'players' => $players,
+        'form' => $form->createView()
+      );
+    }
 
 }

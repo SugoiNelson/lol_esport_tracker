@@ -4,6 +4,8 @@ namespace LolBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 
+use Doctrine\Common\Collections\ArrayCollection;
+
 /**
  * Team
  *
@@ -29,19 +31,21 @@ class Team
     private $name;
 
     /**
-     * @ORM\ManyToOne(targetEntity="Game", inversedBy="team")
-     * @ORM\JoinColumn(name="game_id", referencedColumnName="id")
+     * @ORM\ManyToMany(targetEntity="Game")
+     * @ORM\JoinTable(
+     *  name="game_team"
+     * )
      */
     private $game;
-
 
     /**
      * @ORM\OneToMany(targetEntity="Player", mappedBy="team")
      */
     private $player;
-    
+
     public function __construct() {
-      $this->team = new ArrayCollection();
+      $this->player = new ArrayCollection();
+      $this->game = new ArrayCollection();
     }
 
 

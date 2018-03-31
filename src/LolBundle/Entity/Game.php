@@ -33,40 +33,38 @@ class Game
     private $date;
 
     /**
-     * @var string
      *
-     * @ORM\Column(name="team_one", type="string", length=255)
+     * @ORM\ManyToMany(targetEntity="Team")
+     * @ORM\JoinTable(
+     *  name="game_team",
+     *  joinColumns={@ORM\JoinColumn(name="teamA_id", referencedColumnName="id", onDelete="persist")}
+     * )
      */
-    private $teamOne;
-    /**
-     * @ORM\OneToMany(targetEntity="Team", mappedBy="game")
-     */
-    private $team;
-
-    public function __construct() {
-      $this->team = new ArrayCollection();
-    }
+    private $teamA_id;
 
     /**
-     * @var string
      *
-     * @ORM\Column(name="team_two", type="string", length=255)
+     * @ORM\ManyToMany(targetEntity="Team")
+     * @ORM\JoinTable(
+     *  name="game_team",
+     *  joinColumns={@ORM\JoinColumn(name="teamB_id", referencedColumnName="id", onDelete="persist")}
+     * )
      */
-    private $teamTwo;
+    private $teamB_id;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="team_one_score", type="string", length=255)
+     * @ORM\Column(name="teamA_Score", type="string", length=255)
      */
-    private $teamOneScore;
+    private $teamA_Score;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="team_two_score", type="string", length=255)
+     * @ORM\Column(name="teamB_Score", type="string", length=255)
      */
-    private $teamTwoScore;
+    private $teamB_Score;
 
 
     /**
@@ -104,98 +102,98 @@ class Game
     }
 
     /**
-     * Set teamOne
+     * Set teamA_id
      *
-     * @param string $teamOne
+     * @param string $teamA_id
      *
      * @return Game
      */
-    public function setTeamOne($teamOne)
+    public function setTeamAid($teamA_id)
     {
-        $this->teamOne = $teamOne;
+        $this->teamA_id = $teamA_id;
 
         return $this;
     }
 
     /**
-     * Get teamOne
+     * Get teamA_id
      *
      * @return string
      */
-    public function getTeamOne()
+    public function getTeamAid()
     {
-        return $this->teamOne;
+        return $this->teamA_id;
     }
 
     /**
-     * Set teamTwo
+     * Set teamB_id
      *
-     * @param string $teamTwo
+     * @param string $teamB_id
      *
      * @return Game
      */
-    public function setTeamTwo($teamTwo)
+    public function setTeamBid($teamB_id)
     {
-        $this->teamTwo = $teamTwo;
+        $this->teamB_id = $teamB_id;
 
         return $this;
     }
 
     /**
-     * Get teamTwo
+     * Get teamB_id
      *
      * @return string
      */
-    public function getTeamTwo()
+    public function getTeamBid()
     {
-        return $this->teamTwo;
+        return $this->teamB_id;
     }
 
     /**
-     * Set teamOneScore
+     * Set teamA_Score
      *
-     * @param string $teamOneScore
+     * @param string $teamA_Score
      *
      * @return Game
      */
-    public function setTeamOneScore($teamOneScore)
+    public function setTeamAScore($teamA_Score)
     {
-        $this->teamOneScore = $teamOneScore;
+        $this->teamA_Score = $teamA_Score;
 
         return $this;
     }
 
     /**
-     * Get teamOneScore
+     * Get teamA_Score
      *
      * @return string
      */
-    public function getTeamOneScore()
+    public function getTeamAScore()
     {
-        return $this->teamOneScore;
+        return $this->teamA_Score;
     }
 
     /**
-     * Set teamTwoScore
+     * Set teamB_Score
      *
-     * @param string $teamTwoScore
+     * @param string $teamB_Score
      *
      * @return Game
      */
-    public function setTeamTwoScore($teamTwoScore)
+    public function setTeamBScore($teamB_Score)
     {
-        $this->teamTwoScore = $teamTwoScore;
+        $this->teamB_Score = $teamB_Score;
 
         return $this;
     }
 
     /**
-     * Get teamTwoScore
+     * Get teamB_Score
      *
      * @return string
      */
-    public function getTeamTwoScore()
+    public function getTeamBScore()
     {
-        return $this->teamTwoScore;
+        return $this->teamB_Score;
     }
 }

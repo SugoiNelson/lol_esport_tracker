@@ -3,6 +3,7 @@
 namespace LolBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\Common\Collections\ArrayCollection;
 
 /**
  * Player
@@ -47,10 +48,6 @@ class Player
      * @ORM\JoinColumn(name="team_id", referencedColumnName="id")
      */
     private $team;
-
-    public function __construct() {
-      $this->team = new ArrayCollection();
-    }
 
 
     /**
@@ -133,5 +130,14 @@ class Player
     public function getGender()
     {
         return $this->gender;
+    }
+
+    public function setTeam($team){
+      $this->team = $team;
+      return $this;
+    }
+
+    public function getTeam(){
+      return $this->team;
     }
 }

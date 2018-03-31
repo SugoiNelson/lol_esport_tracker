@@ -31,15 +31,15 @@
             </td>
             <td>
               {#<a href="{{ path('team', {'id': team.id}) }}">#}
-                {{ game.teamOne }}
+                {{ game.teamA_id }}
               {#</a>#}
             </td>
             <td>
-              {{ game.teamOneScore }} --- {{ game.teamTwoScore }}
+              {{ game.teamA_Score }} --- {{ game.teamB_Score }}
             </td>
             <td>
               {#<a href="{{ path('team', {'id': team.id}) }}">#}
-                {{ game.teamTwo }}
+                {{ game.teamB-id }}
               {#</a>#}
             </td>
           </tr>
@@ -59,7 +59,7 @@
       <p>
       {{ game.Date|date('d/m/Y') }}
       <br>
-      {{ game.teamOne }} - {{ game.teamTwo }}
+      {{ game.teamA_id }} - {{ game.teamB_id }}
       </p>
       {{ dump(game) }}
 

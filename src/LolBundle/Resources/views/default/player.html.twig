@@ -6,4 +6,54 @@
 
 {% block body %}
 
+  <h1> Les joueurs en course : </h1>
+
+  {% if players is empty %}
+    <p>{{ 'players.nb'|transchoice(0) }}</p>
+  {% else %}
+
+      {{ dump(players) }}
+      <p>{{ 'players.nb'|transchoice(players|length, {'%nb%': players|length}) }}</p>
+      <table class="table">
+        <thead>
+          <tr>
+            <th scope="col">Pseudo</th>
+            <th scope="col">Prénom</th>
+            <th scope="col">Genre</th>
+            <th scope="col">Equipe</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for player in players %}
+            <tr>
+              <td>
+                {{ player.name }}
+              </td>
+              <td>
+                {{ player.firstName }}
+              </td>
+              <td>
+                {{ player.gender }}
+              </td>
+              <td>
+                <a href="{{ path('list_teams', {'id': player.team.id}) }}">
+                  {{player.team.name}}
+                </a>
+              </td>
+            </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+
+  {% endif %}
+
+  <p>
+    Ajouter un joueur :
+  </p>
+
+  {{form_start(form)}}
+    {{form_widget(form)}}
+  {{form_end(form)}}
+
+
 {% endblock %}
