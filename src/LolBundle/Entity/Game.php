@@ -37,34 +37,34 @@ class Game
      * @ORM\ManyToMany(targetEntity="Team")
      * @ORM\JoinTable(
      *  name="game_team",
-     *  joinColumns={@ORM\JoinColumn(name="teamA_id", referencedColumnName="id", onDelete="persist")}
+     *  joinColumns={@ORM\JoinColumn(name="teamA", referencedColumnName="id", onDelete="persist")}
      * )
      */
-    private $teamA_id;
+    public $teamA;
 
     /**
      *
      * @ORM\ManyToMany(targetEntity="Team")
      * @ORM\JoinTable(
-     *  name="game_team",
-     *  joinColumns={@ORM\JoinColumn(name="teamB_id", referencedColumnName="id", onDelete="persist")}
+     *  name="GameTeam",
+     *  joinColumns={@ORM\JoinColumn(name="teamB", referencedColumnName="id", onDelete="persist")}
      * )
      */
-    private $teamB_id;
+    public $teamB;
 
     /**
      * @var string
      *
      * @ORM\Column(name="teamA_Score", type="string", length=255)
      */
-    private $teamA_Score;
+    public $teamA_Score;
 
     /**
      * @var string
      *
      * @ORM\Column(name="teamB_Score", type="string", length=255)
      */
-    private $teamB_Score;
+    public $teamB_Score;
 
 
     /**
@@ -108,7 +108,7 @@ class Game
      *
      * @return Game
      */
-    public function setTeamAid($teamA_id)
+    public function setTeamA_id($teamA_id)
     {
         $this->teamA_id = $teamA_id;
 
@@ -120,7 +120,7 @@ class Game
      *
      * @return string
      */
-    public function getTeamAid()
+    public function getTeamA_id()
     {
         return $this->teamA_id;
     }
@@ -132,7 +132,7 @@ class Game
      *
      * @return Game
      */
-    public function setTeamBid($teamB_id)
+    public function setTeamB_id($teamB_id)
     {
         $this->teamB_id = $teamB_id;
 
@@ -144,7 +144,7 @@ class Game
      *
      * @return string
      */
-    public function getTeamBid()
+    public function getTeamB_id()
     {
         return $this->teamB_id;
     }
@@ -152,11 +152,11 @@ class Game
     /**
      * Set teamA_Score
      *
-     * @param string $teamA_Score
+     * @param integer $teamA_Score
      *
      * @return Game
      */
-    public function setTeamAScore($teamA_Score)
+    public function setTeamA_Score($teamA_Score)
     {
         $this->teamA_Score = $teamA_Score;
 
@@ -168,7 +168,7 @@ class Game
      *
      * @return string
      */
-    public function getTeamAScore()
+    public function getTeamA_Score()
     {
         return $this->teamA_Score;
     }
@@ -176,11 +176,11 @@ class Game
     /**
      * Set teamB_Score
      *
-     * @param string $teamB_Score
+     * @param integer $teamB_Score
      *
      * @return Game
      */
-    public function setTeamBScore($teamB_Score)
+    public function setTeamB_Score($teamB_Score)
     {
         $this->teamB_Score = $teamB_Score;
 
@@ -192,7 +192,7 @@ class Game
      *
      * @return string
      */
-    public function getTeamBScore()
+    public function getTeamB_Score()
     {
         return $this->teamB_Score;
     }

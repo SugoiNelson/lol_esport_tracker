@@ -21,6 +21,7 @@
             <th scope="col">Prénom</th>
             <th scope="col">Genre</th>
             <th scope="col">Equipe</th>
+            <th scope="col">Supprimer</th>
           </tr>
         </thead>
         <tbody>
@@ -39,6 +40,9 @@
                 <a href="{{ path('list_teams', {'id': player.team.id}) }}">
                   {{player.team.name}}
                 </a>
+              </td>
+              <td>
+                <a href="{{ path('delete_player', {'id': player.id}) }}" class="btn btn-danger">Supprimer le joueur</a>
               </td>
             </tr>
           {% endfor %}

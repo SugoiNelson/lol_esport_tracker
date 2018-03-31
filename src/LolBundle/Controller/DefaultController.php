@@ -41,11 +41,11 @@ class DefaultController extends Controller
     $game = new Game();
     $form = $this->createFormBuilder($game)
             ->add('date', DateType::class)
-            ->add('teamA_id', EntityType::class, array(
+            ->add('teamA', EntityType::class, array(
               'class' => 'LolBundle:Team',
               'choice_label' => 'name'
             ))
-            ->add('teamB_id', EntityType::class, array(
+            ->add('teamB', EntityType::class, array(
               'class' => 'LolBundle:Team',
               'choice_label' => 'name'
             ))
@@ -224,5 +224,36 @@ class DefaultController extends Controller
         'form' => $form->createView()
       );
     }
+
+    /**
+     * @Route("/players/delete/{id}", name="delete_player")
+     */
+    public function deletePlayer(Request $request, $id){
+
+      $bdd = $this->getDoctrine()->getManager();
+      $traduction = $this->get('translator');
+
+      $player = $bdd->getRepository('LolBundle:Player')->findOneById($id);
+
+      if(!empty($player)){
+        // Le joueur existe
+        $bdd->remove($player);
+        $bdd->flush();
+
+        $this->get('session')->getFlashBag()->add(
+          'success',
+          $traduction->trans('players.deleted')
+        );
+      }
+      else{
+        // Le joueur n'existe pas
+        $this->get('session')->getFlashBag()->add(
+          'danger',
+          $traduction->trans('players.unknown')
+        );
+      }
+      return $this->redirectToRoute('home');
+    }
+
 
 }

@@ -12,7 +12,7 @@
     <p>{{ 'games.nb'|transchoice(0) }}</p>
   {% else %}
 
-    {#{ dump(games) }#}
+    {{ dump(games) }}
     <p>{{ 'games.nb'|transchoice(games|length, {'%nb%': games|length}) }}</p>
     <table class="table">
       <thead>
@@ -30,17 +30,17 @@
               {{ game.Date|date('d/m/Y') }}
             </td>
             <td>
-              {#<a href="{{ path('team', {'id': team.id}) }}">#}
-                {{ game.teamA_id }}
-              {#</a>#}
+              <a href="{{ path('team', {'id': game.teamA.id}) }}">
+                {{ game.teamA.name }}
+              </a>
             </td>
             <td>
               {{ game.teamA_Score }} --- {{ game.teamB_Score }}
             </td>
             <td>
-              {#<a href="{{ path('team', {'id': team.id}) }}">#}
-                {{ game.teamB-id }}
-              {#</a>#}
+              <a href="{{ path('team', {'id': game.teamB.id}) }}">
+                {{ game.teamB.name }}
+              </a>
             </td>
           </tr>
         {% endfor %}
@@ -67,7 +67,7 @@
         {{form_widget(form)}}
       {{form_end(form)}}
 
-      {#<a href="{{ path('delete_games', {'id': games.id}) }}" class="btn btn-danger">Supprimer le match</a>#}
+      <a href="{{ path('delete_games', {'id': games.id}) }}" class="btn btn-danger">Supprimer le match</a>
 
     {% else %}
       <p>Ce match n'a pas eu lieu</p>
