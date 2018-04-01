@@ -177,7 +177,7 @@ class DefaultController extends Controller
         $traduction->trans('teams.unknown')
       );
     }
-    return $this->redirectToRoute('home');
+    return $this->redirectToRoute('list_teams');
   }
 
 
