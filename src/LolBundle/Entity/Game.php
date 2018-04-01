@@ -34,7 +34,7 @@ class Game
 
     /**
      *
-     * @ORM\ManyToMany(targetEntity="Team")
+     * @ORM\ManyToMany(targetEntity="Team", mappedBy="games", cascade={"persist", "remove"})
      * @ORM\JoinTable(
      *  name="game_team",
      *  joinColumns={@ORM\JoinColumn(name="teamA", referencedColumnName="id", onDelete="persist")}
@@ -44,13 +44,18 @@ class Game
 
     /**
      *
-     * @ORM\ManyToMany(targetEntity="Team")
+     * @ORM\ManyToMany(targetEntity="Team", mappedBy="games", cascade={"persist", "remove"})
      * @ORM\JoinTable(
      *  name="GameTeam",
      *  joinColumns={@ORM\JoinColumn(name="teamB", referencedColumnName="id", onDelete="persist")}
      * )
      */
     public $teamB;
+
+    public function __construct() {
+      $this->teamA = new ArrayCollection();
+      $this->teamB = new ArrayCollection();
+    }
 
     /**
      * @var string

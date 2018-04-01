@@ -31,10 +31,10 @@ class Team
     private $name;
 
     /**
-     * @ORM\ManyToMany(targetEntity="Game")
+     * @ORM\ManyToMany(targetEntity="Game", inversedBy="teams")
      * @ORM\JoinTable(name="game_team")
      */
-    private $game;
+    private $games;
 
     /**
      * @ORM\OneToMany(targetEntity="Player", mappedBy="team")

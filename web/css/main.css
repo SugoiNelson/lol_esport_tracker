@@ -11,7 +11,7 @@ body {
 
 table {
   width: 900px;
-  margin: 50px;
+  margin: auto;
 }
 
 th, td {

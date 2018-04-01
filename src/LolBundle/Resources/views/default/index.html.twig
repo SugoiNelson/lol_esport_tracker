@@ -7,6 +7,9 @@
 {% block body %}
 
   <h1> Bienvenue sur LOL esport tracker ! </h1>
+  <p>
+    League of Legend est un jeu de type MOBA très actif sur la scène de l'esport. Utilisez cette application pour garder une trace des résultats de vos équipes préférées.
+  </p>
 
   {% if games is empty %}
     <p>{{ 'games.nb'|transchoice(0) }}</p>
@@ -30,17 +33,13 @@
               {{ game.Date|date('d/m/Y') }}
             </td>
             <td>
-              <a href="{{ path('team', {'id': game.teamA.id}) }}">
-                {{ game.teamA.name }}
-              </a>
+              team one
             </td>
             <td>
               {{ game.teamA_Score }} --- {{ game.teamB_Score }}
             </td>
             <td>
-              <a href="{{ path('team', {'id': game.teamB.id}) }}">
-                {{ game.teamB.name }}
-              </a>
+              team two
             </td>
           </tr>
         {% endfor %}
@@ -59,15 +58,13 @@
       <p>
       {{ game.Date|date('d/m/Y') }}
       <br>
-      {{ game.teamA_id }} - {{ game.teamB_id }}
+      team one - team two
       </p>
       {{ dump(game) }}
 
       {{form_start(form)}}
         {{form_widget(form)}}
       {{form_end(form)}}
-
-      <a href="{{ path('delete_games', {'id': games.id}) }}" class="btn btn-danger">Supprimer le match</a>
 
     {% else %}
       <p>Ce match n'a pas eu lieu</p>

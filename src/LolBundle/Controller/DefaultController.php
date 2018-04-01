@@ -191,6 +191,7 @@ class DefaultController extends Controller
 
       $player = new Player();
       $form = $this->createFormBuilder($player)
+        ->add('pseudo', TextType::class)
         ->add('name', TextType::class)
         ->add('first_name', TextType::class)
         ->add('gender', TextType::class)
@@ -252,7 +253,7 @@ class DefaultController extends Controller
           $traduction->trans('players.unknown')
         );
       }
-      return $this->redirectToRoute('home');
+      return $this->redirectToRoute('list_players');
     }
 
 

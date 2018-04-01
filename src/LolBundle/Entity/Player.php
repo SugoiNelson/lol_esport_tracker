@@ -25,6 +25,13 @@ class Player
     /**
      * @var string
      *
+     * @ORM\Column(name="pseudo", type="string", length=255)
+     */
+    private $pseudo;
+
+    /**
+     * @var string
+     *
      * @ORM\Column(name="name", type="string", length=255)
      */
     private $name;
@@ -82,6 +89,30 @@ class Player
     public function getName()
     {
         return $this->name;
+    }
+
+    /**
+     * Set pseudo
+     *
+     * @param string $pseudo
+     *
+     * @return Player
+     */
+    public function setPseudo($pseudo)
+    {
+        $this->pseudo = $pseudo;
+
+        return $this;
+    }
+
+    /**
+     * Get pseudo
+     *
+     * @return string
+     */
+    public function getPseudo()
+    {
+        return $this->pseudo;
     }
 
     /**
