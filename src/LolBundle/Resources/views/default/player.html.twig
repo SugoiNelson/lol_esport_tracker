@@ -7,12 +7,15 @@
 {% block body %}
 
   <h1> Les joueurs en course : </h1>
+  <p>
+    /!\ Chaque joueur doit être inscrit avec son pseudo (nom de scène et pseudo en jeu), son nom, son prénom, son genre et son équipe /!\
+  </p>
 
   {% if players is empty %}
     <p>{{ 'players.nb'|transchoice(0) }}</p>
   {% else %}
 
-      {{ dump(players) }}
+      {#{ dump(players) }#}
       <p>{{ 'players.nb'|transchoice(players|length, {'%nb%': players|length}) }}</p>
       <table class="table">
         <thead>

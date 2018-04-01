@@ -12,7 +12,7 @@
     <p>{{ 'teams.nb'|transchoice(0) }}</p>
   {% else %}
 
-    {{ dump(teams) }}
+    {#{ dump(teams) }#}
     <p>{{ 'teams.nb'|transchoice(teams|length, {'%nb%': teams|length}) }}</p>
     <table class="table">
       <thead>
@@ -28,9 +28,17 @@
               {{ team.name}}
             </td>
             <td>
-              {% for player in team %}
-                  {{player.name}}
-              {% endfor %}
+              {% if team.player is empty %}
+                Pas de joueur dans l'équipe
+              {% else %}
+                <ul>
+                  {% for player in team.player %}
+                    <li>
+                      {{ player.pseudo }}
+                    </li>
+                  {% endfor %}
+                </ul>
+              {% endif %}
             </td>
           </tr>
         {% endfor %}

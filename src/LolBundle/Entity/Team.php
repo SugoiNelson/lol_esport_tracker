@@ -85,4 +85,8 @@ class Team
         return $this->name;
     }
 
+    public function getPlayer(){
+      return $this->player;
+    }
+
 }
