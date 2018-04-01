@@ -32,9 +32,7 @@ class Team
 
     /**
      * @ORM\ManyToMany(targetEntity="Game")
-     * @ORM\JoinTable(
-     *  name="game_team"
-     * )
+     * @ORM\JoinTable(name="game_team")
      */
     private $game;
 
@@ -80,6 +78,10 @@ class Team
      */
     public function getName()
     {
+        return $this->name;
+    }
+
+    public function __toString() {
         return $this->name;
     }
 
