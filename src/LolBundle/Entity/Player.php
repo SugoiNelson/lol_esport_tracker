@@ -142,7 +142,7 @@ class Player
     /**
      * Set gender
      *
-     * @param string $gender
+     * @param boolean $gender
      *
      * @return Player
      */
@@ -156,7 +156,7 @@ class Player
     /**
      * Get gender
      *
-     * @return string
+     * @return bool
      */
     public function getGender()
     {

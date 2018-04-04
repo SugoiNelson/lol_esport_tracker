@@ -14,13 +14,14 @@ use Symfony\Component\Form\Forms;
 use Symfony\Component\Form\Extension\HttpFoundation\HttpFoundationExtension;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Component\Form\Extension\Core\Type\IntegerType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Session\Session;
 use Symfony\Component\HttpFoundation\RedirectResponse;
-use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 
 // Import des entitées
 
@@ -194,7 +195,13 @@ class DefaultController extends Controller
         ->add('pseudo', TextType::class)
         ->add('name', TextType::class)
         ->add('first_name', TextType::class)
-        ->add('gender', TextType::class)
+        ->add('gender', ChoiceType::class, array(
+          'choices'  => array(
+            'Homme' => 1,
+            'Femme' => 2,
+            'Autre' => 0,
+          ),
+        ))
         ->add('team', EntityType::class, array(
           'class' => 'LolBundle:Team',
           'choice_label' => 'name'
