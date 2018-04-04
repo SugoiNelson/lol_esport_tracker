@@ -33,28 +33,20 @@ class Game
     private $date;
 
     /**
-     *
-     * @ORM\ManyToMany(targetEntity="Team", mappedBy="games", cascade={"persist", "remove"})
-     * @ORM\JoinTable(
-     *  name="game_team",
-     *  joinColumns={@ORM\JoinColumn(name="teamA", referencedColumnName="id", onDelete="persist")}
-     * )
+     * @ORM\ManyToOne(targetEntity="Team", inversedBy="vs1")
+     * @ORM\JoinColumn(name="teamA", referencedColumnName="id", nullable=true, onDelete="SET NULL")
      */
-    public $teamA;
+    private $teamA;
 
     /**
-     *
-     * @ORM\ManyToMany(targetEntity="Team", mappedBy="games", cascade={"persist", "remove"})
-     * @ORM\JoinTable(
-     *  name="GameTeam",
-     *  joinColumns={@ORM\JoinColumn(name="teamB", referencedColumnName="id", onDelete="persist")}
-     * )
+     * @ORM\ManyToOne(targetEntity="Team", inversedBy="vs2")
+     * @ORM\JoinColumn(name="teamB", referencedColumnName="id", nullable=true, onDelete="SET NULL")
      */
-    public $teamB;
+    private $teamB;
+
 
     public function __construct() {
-      $this->teamA = new ArrayCollection();
-      $this->teamB = new ArrayCollection();
+      $this->equipes = new ArrayCollection();
     }
 
     /**
@@ -107,52 +99,48 @@ class Game
     }
 
     /**
-     * Set teamA_id
-     *
-     * @param string $teamA_id
-     *
-     * @return Game
-     */
-    public function setTeamA_id($teamA_id)
-    {
-        $this->teamA_id = $teamA_id;
+   * Set teamA
+   *
+   * @param integer $teamA
+   *
+   * @return Vs
+   */
+  public function setTeamA($teamA)
+  {
+      $this->teamA = $teamA;
 
-        return $this;
-    }
+      return $this;
+  }
 
-    /**
-     * Get teamA_id
-     *
-     * @return string
-     */
-    public function getTeamA_id()
-    {
-        return $this->teamA_id;
-    }
+  /**
+   * Get teamA
+   */
+  public function getTeamA()
+  {
+      return $this->teamA;
+  }
 
-    /**
-     * Set teamB_id
-     *
-     * @param string $teamB_id
-     *
-     * @return Game
-     */
-    public function setTeamB_id($teamB_id)
-    {
-        $this->teamB_id = $teamB_id;
+  /**
+   * Set teamB
+   *
+   * @param integer $teamB
+   *
+   * @return Vs
+   */
+  public function setTeamB($teamB)
+  {
+      $this->teamB = $teamB;
 
-        return $this;
-    }
+      return $this;
+  }
 
-    /**
-     * Get teamB_id
-     *
-     * @return string
-     */
-    public function getTeamB_id()
-    {
-        return $this->teamB_id;
-    }
+  /**
+   * Get teamB
+   */
+  public function getTeamB()
+  {
+      return $this->teamB;
+  }
 
     /**
      * Set teamA_Score

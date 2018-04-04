@@ -31,10 +31,14 @@ class Team
     private $name;
 
     /**
-     * @ORM\ManyToMany(targetEntity="Game", inversedBy="teams")
-     * @ORM\JoinTable(name="game_team")
+     * @ORM\OneToMany(targetEntity="Game", mappedBy="teamA")
      */
-    private $games;
+    private $vs1;
+
+    /**
+     * @ORM\OneToMany(targetEntity="Game", mappedBy="teamB")
+     */
+    private $vs2;
 
     /**
      * @ORM\OneToMany(targetEntity="Player", mappedBy="team")
@@ -42,10 +46,10 @@ class Team
     private $player;
 
     public function __construct() {
+      $this->vs1 = new ArrayCollection();
+      $this->vs2 = new ArrayCollection();
       $this->player = new ArrayCollection();
-      $this->game = new ArrayCollection();
     }
-
 
     /**
      * Get id
@@ -87,6 +91,26 @@ class Team
 
     public function getPlayer(){
       return $this->player;
+    }
+
+    /**
+     * Get vs1
+     *
+     * @return Vs
+     */
+    public function getVs1()
+    {
+        return $this->vs1;
+    }
+
+    /**
+     * Get vs2
+     *
+     * @return Vs
+     */
+    public function getVs2()
+    {
+        return $this->vs2;
     }
 
 }
